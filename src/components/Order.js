@@ -12,17 +12,24 @@ class Order extends React.Component {
         
         if (!isAvailable) {
             return (
-            <CSSTransition classNames="order" key={key} timeout={{enter: 500, exit: 500}}>
+            <CSSTransition classNames="order" key={key} timeout={{ enter: 500, exit: 500 }}>
                 <li key={key}>Sorry {fish ? fish.name : 'fish'} is no longer available</li>
             </CSSTransition>
             );
         }
         return (
-            <CSSTransition classNames="order" key={key} timeout={{enter: 500, exit: 500}}>
+            <CSSTransition classNames="order" key={key} timeout={{ enter: 500, exit: 500 }}>
                 <li key={key}>
-                    {count} lbs {fish.name} 
-                    {formatPrice(count * fish.price)}
-                    <button onClick={() => this.props.removeFromOrder(key)}>X</button>
+                    <span>
+                        <TransitionGroup component="span" className="count">
+                            <CSSTransition classNames="count" key={count} timeout={{ enter: 500, exit: 500 }}>
+                                <span>{count}</span>
+                            </CSSTransition>
+                        </TransitionGroup>
+                        lbs {fish.name} 
+                        {formatPrice(count * fish.price)}
+                        <button onClick={() => this.props.removeFromOrder(key)}>X</button>
+                    </span>
                 </li>
             </CSSTransition>
         );
